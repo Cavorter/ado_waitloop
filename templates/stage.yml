@@ -5,16 +5,16 @@ parameters:
   type: object
   default: {}
 - name: interval
-  type: int
+  type: number
   default: 3
 - name: iterations
-  type: int
+  type: number
   default: 5
 
 stages:
 - stage: '${{ parameters.name }}'
   jobs:
-    ${{ each env in parameters.environments }}:
+  - ${{ each env in parameters.environments }}:
     - job:
       name: ${{ parameters.name }}${{ env }}-prep
       displayName: Prep for ${{ parameters.name }}${{ env }}
