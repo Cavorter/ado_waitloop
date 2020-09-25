@@ -1,10 +1,10 @@
 trigger:
-  - branches:
-    - include:
-      - master
-  - paths:
-    - exclude:
-      - README.md
+  branches:
+    include:
+    - master
+  paths:
+    exclude:
+    - README.md
 
 stages:
 - template: templates/stage.yml
