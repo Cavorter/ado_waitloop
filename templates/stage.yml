@@ -29,7 +29,7 @@ stages:
           filePath: $(Build.Source)/scripts/job-prep.ps1
           arguments: -Environment $(envName)
     
-    - job: ${{ parameters.name }}${{ env }}-longop
+    - job: ${{ parameters.name }}${{ env }}_longop
       dependsOn: ${{ parameters.name }}${{ env }}_prep
       displayName: Some Long Operation for ${{ parameters.name }}${{ env }}
       variables:
