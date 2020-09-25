@@ -5,4 +5,4 @@ parameters:
   type: string
 
 variables:
-- envName: ${{ parameters.name }}${{ parameters.suffix }}
+  envName: ${{ parameters.name }}${{ parameters.suffix }}
