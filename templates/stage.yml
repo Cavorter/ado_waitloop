@@ -15,7 +15,7 @@ stages:
 - stage: '${{ parameters.name }}'
   jobs:
   - ${{ each env in parameters.environments }}:
-    - job: ${{ parameters.name }}${{ env }}-prep
+    - job: ${{ parameters.name }}${{ env }}_prep
       displayName: Prep for ${{ parameters.name }}${{ env }}
       variables:
       - template: job-vars.yml
@@ -30,7 +30,7 @@ stages:
           arguments: -Environment $(envName)
     
     - job: ${{ parameters.name }}${{ env }}-longop
-      dependsOn: ${{ parameters.name }}${{ env }}-prep
+      dependsOn: ${{ parameters.name }}${{ env }}_prep
       displayName: Some Long Operation for ${{ parameters.name }}${{ env }}
       variables:
       - template: job-vars.yml
