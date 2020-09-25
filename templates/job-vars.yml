@@ -1,0 +1,8 @@
+parameters:
+- name: name
+  type: string
+- name: suffix
+  type: string
+
+variables:
+- envName: ${{ parameters.name }}${{ parameters.suffix }}

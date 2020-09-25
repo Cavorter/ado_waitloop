@@ -1,0 +1,46 @@
+parameters:
+- name: name
+  type: string
+- name: environments
+  type: object
+  default: {}
+- name: interval
+  type: int
+  default: 3
+- name: iterations
+  type: int
+  default: 5
+
+stages:
+- stage: '${{ parameters.name }}'
+  jobs:
+    ${{ each env in parameters.environments }}:
+    - job:
+      name: ${{ parameters.name }}${{ env }}-prep
+      displayName: Prep for ${{ parameters.name }}${{ env }}
+      variables:
+      - template: job-vars.yml
+        parameters:
+          name: ${{ parameters.name }}
+          suffix: ${{ env }}
+      steps:
+      - task: PowerShell@2
+        inputs:
+          targetType: 'filePath'
+          filePath: $(Build.Source)/scripts/job-prep.ps1
+          arguments: -Environment $(envName)
+    
+    - job:
+      dependsOn: ${{ parameters.name }}${{ env }}-prep
+      name: ${{ parameters.name }}${{ env }}-longop
+      displayName: Some Long Operation for ${{ parameters.name }}${{ env }}
+      variables:
+      - template: job-vars.yml
+        parameters:
+          name: ${{ parameters.name }}
+          suffix: ${{ env }}
+      steps:
+      - task: PowerShell@2
+        inputs:
+          targetType: 'filePath'
+          filePath: $(Build.Source)/scripts/job-long.ps1

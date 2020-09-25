@@ -1,0 +1,22 @@
+trigger:
+  - branches:
+    - include:
+      - master
+  - paths:
+    - exclude:
+      - README.md
+
+stages:
+- template: templates/stage.yml
+  parameters:
+  - name: stg
+  - environments:
+    - 1
+    - 2
+
+- template: templates/stage.yml
+  parameters:
+  - name: prd
+  - environments:
+    - 1
+    - 2
