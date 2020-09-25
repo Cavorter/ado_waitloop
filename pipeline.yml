@@ -9,14 +9,14 @@ trigger:
 stages:
 - template: templates/stage.yml
   parameters:
-  - name: stg
-  - environments:
+    name: stg
+    environments:
     - 1
     - 2
 
 - template: templates/stage.yml
   parameters:
-  - name: prd
-  - environments:
+    name: prd
+    environments:
     - 1
     - 2
